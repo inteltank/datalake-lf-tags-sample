@@ -1,6 +1,8 @@
 # https://github.com/awsdocs/aws-cloudformation-user-guide/blob/main/doc_source/aws-properties-glue-database-databaseinput.md
 Resources:
   datalakeLfTagsDatabase:
+    DependsOn:
+      - datalakeLfTagsBucket
     Type: "AWS::Glue::Database"
     Properties:
       CatalogId: ${self:custom.accountId}

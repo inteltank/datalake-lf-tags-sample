@@ -9,8 +9,8 @@ custom:
   defaultStage: dev
   accountId: 151615857019
   bucketName: "datalake-lf-tags-${self:custom.accountId}"
-  databaseName: "datalake-lf-tags-database"
-  tagKey: ${self:service}
+  databaseName: "datalake-lf-tags"
+  tagKey: "${self:service}"
 
 resources:
   ## IAM
@@ -18,23 +18,26 @@ resources:
   - ${file(./resources/IAM/role/tableMaintainanceRole.yml)}
   - ${file(./resources/IAM/role/fetchDataRole.yml)}
   - ${file(./resources/IAM/role/executeAthenaRole.yml)}
-  
   ## lakeFormation
   - ${file(./resources/LakeFormation/administrators.yml)}
-
   ## Database
   - ${file(./resources/Glue/Database/datalakeLfTags.yml)}
-
   ## table 
-  - ${file(./resources/S3/bucket.yml)}
+  - ${file(./resources/S3/datalakeBucket.yml)}
   - ${file(./resources/Glue/Crawlers/datalake-lf-tags.yml)}
   - ${file(./resources/LakeFormation/datalakeLfTags.yml)}
-  
   ## LFTags
   - ${file(./resources/LakeFormation/Tags/datalakeLfTags.yml)}
-  - ${file(./resources/LakeFormation/TagAssociations/datalakeLfTags.yml)}
+  ## Athena output bucket
+  - ${file(./resources/S3/athenaOutputBucket.yml)}
 
-  ## Permission
-  - ${file(./resources/LakeFormation/Permissions/executeAthenaRole.yml)}
+  ## LF Settings for Glue Crawler
+  - ${file(./resources/LakeFormation/TagAssociations/database.yml)}
+  - ${file(./resources/LakeFormation/Permissions/tableMaintainanceRole.yml)}
+  ## ==================================== ##
+  ## crawler実行完了後                    ##
+  ## ==================================== ##
+  ## LFTagsをresourceに付与
+# - ${file(./resources/LakeFormation/TagAssociations/tables.yml)}
+# - ${file(./resources/LakeFormation/Permissions/executeAthenaRole.yml)}
 
-  

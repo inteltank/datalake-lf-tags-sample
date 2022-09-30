@@ -1,0 +1,6 @@
+Resources:
+  athenaOutputBucket:
+    DeletionPolicy: Retain
+    Type: "AWS::S3::Bucket"
+    Properties:
+      BucketName: "athena-query-result-${self:custom.accountId}"

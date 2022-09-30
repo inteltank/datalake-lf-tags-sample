@@ -16,6 +16,7 @@ Resources:
             Principal:
               Service:
                 - "lakeformation.amazonaws.com"
+                - "glue.amazonaws.com"
             Action:
               - "sts:AssumeRole"
       Policies:

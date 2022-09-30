@@ -1,11 +1,12 @@
 Resources:
-  LfPermissionExecuteAthenaRoleDatabase:
+  tableMaintainancePermissionDatabase:
     Type: "AWS::LakeFormation::PrincipalPermissions"
     Properties:
       Catalog: ${self:custom.accountId}
       Principal:
-        DataLakePrincipalIdentifier: "arn:aws:iam::${self:custom.accountId}:role/execute-athena-role"
+        DataLakePrincipalIdentifier: "arn:aws:iam::${self:custom.accountId}:role/table-maintainance-role"
       Permissions:
+        - "CREATE_TABLE"
         - "DESCRIBE"
       PermissionsWithGrantOption: []
       Resource:
@@ -16,20 +17,17 @@ Resources:
             - TagKey: ${self:custom.tagKey}
               TagValues:
                 - all
-  LfPermissionExecuteAthenaRoleTable:
+
+  tableMaintainancePermissionLocation:
     Type: "AWS::LakeFormation::PrincipalPermissions"
     Properties:
       Catalog: ${self:custom.accountId}
       Principal:
-        DataLakePrincipalIdentifier: "arn:aws:iam::${self:custom.accountId}:role/execute-athena-role"
+        DataLakePrincipalIdentifier: "arn:aws:iam::${self:custom.accountId}:role/table-maintainance-role"
       Permissions:
-        - "SELECT"
+        - "DATA_LOCATION_ACCESS"
       PermissionsWithGrantOption: []
       Resource:
-        LFTagPolicy:
+        DataLocation:
           CatalogId: ${self:custom.accountId}
-          ResourceType: "TABLE"
-          Expression:
-            - TagKey: ${self:custom.tagKey}
-              TagValues:
-                - all
+          ResourceArn: "arn:aws:s3:::${self:custom.bucketName}"

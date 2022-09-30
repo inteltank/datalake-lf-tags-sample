@@ -1,5 +1,7 @@
 Resources:
   setLakeFormationAdmin:
+    DependsOn:
+      - lakeFormationMaintainanceRole
     Type: "AWS::LakeFormation::DataLakeSettings"
     Properties:
       Admins: 

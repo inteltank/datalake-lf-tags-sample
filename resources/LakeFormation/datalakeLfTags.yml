@@ -1,5 +1,8 @@
 Resources:
   datalakeLfTagsLocation:
+    DependsOn:
+      - datalakeLfTagsBucket
+      - fetchDataRole 
     Type: "AWS::LakeFormation::Resource"
     Properties:
       ResourceArn: "arn:aws:s3:::${self:custom.bucketName}"

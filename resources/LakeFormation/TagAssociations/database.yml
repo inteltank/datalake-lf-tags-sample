@@ -1,0 +1,16 @@
+Resources:
+  tagAssociaitionDatabase:
+    DependsOn:
+      - lfTag
+      - datalakeLfTagsDatabase
+    Type: "AWS::LakeFormation::TagAssociation"
+    Properties:
+      Resource:
+        Database:
+          CatalogId: ${self:custom.accountId}
+          Name: ${self:custom.databaseName}
+      LFTags:
+        - CatalogId: ${self:custom.accountId}
+          TagKey: ${self:custom.tagKey}
+          TagValues:
+            - "all"

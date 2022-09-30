@@ -1,0 +1,32 @@
+Resources:
+  tagAssociaitionTableTwo:
+    DependsOn:
+      - lfTag
+    Type: "AWS::LakeFormation::TagAssociation"
+    Properties:
+      Resource:
+        Table:
+          CatalogId: ${self:custom.accountId}
+          DatabaseName: ${self:custom.databaseName}
+          Name: "table_two"
+      LFTags:
+        - CatalogId: ${self:custom.accountId}
+          TagKey: ${self:custom.tagKey}
+          TagValues:
+            - "all"
+
+  tagAssociaitionTableThree:
+    DependsOn:
+      - lfTag
+    Type: "AWS::LakeFormation::TagAssociation"
+    Properties:
+      Resource:
+        Table:
+          CatalogId: ${self:custom.accountId}
+          DatabaseName: ${self:custom.databaseName}
+          Name: "table_three"
+      LFTags:
+        - CatalogId: ${self:custom.accountId}
+          TagKey: ${self:custom.tagKey}
+          TagValues:
+            - "personal-information"
