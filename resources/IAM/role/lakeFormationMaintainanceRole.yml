@@ -1,0 +1,22 @@
+Resources:
+  lakeFormationMaintainanceRole:
+    Type: "AWS::IAM::Role"
+    Properties:
+      RoleName: "lakeformation-maintainance-role"
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: "Allow"
+            Principal:
+              AWS:
+                - "arn:aws:iam::${self:custom.accountId}:user/Administrator"
+            Action:
+              - "sts:AssumeRole"
+      Policies:
+        - PolicyName: "root"
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: "Allow"
+                Action: "*"
+                Resource: "*"

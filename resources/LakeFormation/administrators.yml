@@ -1,0 +1,9 @@
+Resources:
+  setLakeFormationAdmin:
+    Type: "AWS::LakeFormation::DataLakeSettings"
+    Properties:
+      Admins: 
+        - DataLakePrincipalIdentifier: "arn:aws:iam::${self:custom.accountId}:role/lakeformation-maintainance-role"
+      TrustedResourceOwners:
+        - '${self:custom.accountId}'
+         

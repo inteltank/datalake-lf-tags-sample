@@ -1,0 +1,27 @@
+# https://github.com/awsdocs/aws-cloudformation-user-guide/blob/main/doc_source/aws-properties-glue-database-databaseinput.md
+Resources:
+  datalakeLfTagsDatabase:
+    Type: "AWS::Glue::Database"
+    Properties:
+      CatalogId: ${self:custom.accountId}
+      DatabaseInput:
+        Name: ${self:custom.databaseName}
+        Description: "sample database to verify the behaviour of LF-tags"
+      # CreateTableDefaultPermissions:
+      #   - Permissions:
+      #      - "ALL"
+      #      - "SELECT"
+      #      - "ALTER"
+      #      - "DROP"
+      #      - "DELETE"
+      #      - "INSERT"
+      #      - "CREATE_DATABASE"
+      #      - "CREATE_TABLE"
+      #      - "DATA_LOCATION_ACCESS"
+      #        # 他にもたくさんある模様
+      #     Principal: 
+      #       DataLakePrincipalIdentifier: "arn:aws:iam::${self:custom.accountId}:role/table-maintainance-role"
+        LocationUri: "s3://${self:custom.bucketName}/"
+      # Parameters:
+      # TargetDatabase:
+

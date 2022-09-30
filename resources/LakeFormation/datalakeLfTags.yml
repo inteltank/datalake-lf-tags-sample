@@ -1,0 +1,8 @@
+Resources:
+  datalakeLfTagsLocation:
+    Type: "AWS::LakeFormation::Resource"
+    Properties:
+      ResourceArn: "arn:aws:s3:::${self:custom.bucketName}"
+      RoleArn: "arn:aws:iam::${self:custom.accountId}:role/fetch-data-role"
+      UseServiceLinkedRole: true
+

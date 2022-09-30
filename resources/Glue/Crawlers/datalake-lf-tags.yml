@@ -1,0 +1,17 @@
+Resources:
+  glueCrawler:
+    Type: "AWS::Glue::Crawler"
+    DependsOn:
+      - datalakeLfTagsBucket
+      - datalakeLfTagsDatabase
+    Properties:
+      Name: ${self:service}
+      Role: !Ref tableMaintainanceRole
+      DatabaseName: ${self:custom.databaseName}
+      Targets:
+        S3Targets:
+          - Path: ${self:custom.bucketName}
+      SchemaChangePolicy:
+        UpdateBehavior: "LOG"
+        DeleteBehavior: "DEPRECATE_IN_DATABASE"
+

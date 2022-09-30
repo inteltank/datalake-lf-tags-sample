@@ -1,0 +1,33 @@
+service: datalake-lf-tags
+
+provider:
+  name: aws
+  stage: ${opt:stage, self:custom.defaultStage}
+  region: ap-northeast-1
+
+custom:
+  defaultStage: dev
+  accountId: 151615857019
+  bucketName: "datalake-lf-tags-${self:custom.accountId}"
+  databaseName: "datalake-lf-tags-database"
+
+resources:
+  ## IAM
+  - ${file(./resources/IAM/role/lakeFormationMaintainanceRole.yml)}
+  - ${file(./resources/IAM/role/tableMaintainanceRole.yml)}
+  - ${file(./resources/IAM/role/fetchDataRole.yml)}
+  - ${file(./resources/IAM/role/executeAthenaRole.yml)}
+  
+  ## lakeFormation
+  - ${file(./resources/LakeFormation/administrators.yml)}
+
+  ## Database
+  - ${file(./resources/Glue/Database/datalakeLfTags.yml)}
+
+  ## table 
+  - ${file(./resources/S3/bucket.yml)}
+  - ${file(./resources/Glue/Crawlers/datalake-lf-tags.yml)}
+  - ${file(./resources/LakeFormation/datalakeLfTags.yml)}
+  
+
+  
