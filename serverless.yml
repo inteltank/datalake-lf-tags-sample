@@ -10,6 +10,7 @@ custom:
   accountId: 151615857019
   bucketName: "datalake-lf-tags-${self:custom.accountId}"
   databaseName: "datalake-lf-tags-database"
+  tagKey: ${self:service}
 
 resources:
   ## IAM
@@ -29,5 +30,11 @@ resources:
   - ${file(./resources/Glue/Crawlers/datalake-lf-tags.yml)}
   - ${file(./resources/LakeFormation/datalakeLfTags.yml)}
   
+  ## LFTags
+  - ${file(./resources/LakeFormation/Tags/datalakeLfTags.yml)}
+  - ${file(./resources/LakeFormation/TagAssociations/datalakeLfTags.yml)}
+
+  ## Permission
+  - ${file(./resources/LakeFormation/Permissions/executeAthenaRole.yml)}
 
   

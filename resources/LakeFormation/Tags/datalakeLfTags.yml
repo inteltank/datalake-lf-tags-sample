@@ -1,0 +1,10 @@
+Resources:
+  lfTag:
+    Type: "AWS::LakeFormation::Tag"
+    Properties:
+      CatalogId: ${self:custom.accountId}
+      TagKey: ${self:custom.tagKey}
+      TagValues:
+        - "all"
+        - "personal-information"
+

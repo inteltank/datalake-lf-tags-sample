@@ -1,0 +1,35 @@
+Resources:
+  #  LfPermissionExecuteAthenaRoleDatabase:
+  #    Type: "AWS::LakeFormation::PrincipalPermissions"
+  #    Properties:
+  #      Catalog: ${self:custom.accountId}
+  #      Principal:
+  #        DataLakePrincipalIdentifier: "arn:aws:iam::${self:custom.accountId}:role/execute-athena-role"
+  #      Permissions:
+  #        - "DESCRIBE"
+  #      PermissionsWithGrantOption: []
+  #      Resource:
+  #        LFTagPolicy:
+  #          CatalogId: ${self:custom.accountId}
+  #          ResourceType: "DATABASE"
+  #          Expression:
+  #            - TagKey: ${self:custom.tagKey}
+  #              TagValues:
+  #                - all
+  #  LfPermissionExecuteAthenaRoleTable:
+  #    Type: "AWS::LakeFormation::PrincipalPermissions"
+  #    Properties:
+  #      Catalog: ${self:custom.accountId}
+  #      Principal:
+  #        DataLakePrincipalIdentifier: "arn:aws:iam::${self:custom.accountId}:role/execute-athena-role"
+  #      Permissions:
+  #        - "SELECT"
+  #      PermissionsWithGrantOption: []
+  #      Resource:
+  #        LFTagPolicy:
+  #          CatalogId: ${self:custom.accountId}
+  #          ResourceType: "TABLE"
+  #          Expression:
+  #            - TagKey: ${self:custom.tagKey}
+  #              TagValues:
+  #                - all
